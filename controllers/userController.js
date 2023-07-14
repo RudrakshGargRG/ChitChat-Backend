@@ -60,6 +60,7 @@ module.exports.login = async (req, res, next) => {
 
   module.exports.getAllUsers = async (req, res, next) => {
     try {
+      
       const users = await User.find({ _id: { $ne: req.params.id } }).select([
         "email",
         "username",
@@ -67,6 +68,38 @@ module.exports.login = async (req, res, next) => {
         "_id",
       ]);
       return res.json(users);
+    } catch (ex) {
+      next(ex);
+    }
+  }
+
+
+  module.exports.getUserProfile = async (req, res, next) => {
+    try {
+
+      const userId = req.params.id;
+      const user = await User.findOne({_id: userId});
+      return res.json(user);
+
+    } catch (ex) {
+      next(ex);
+    }
+  }
+
+  module.exports.updateUserProfile = async (req, res, next) => {
+    try {
+      const userId = req.params.id;
+      const about = req.body.about;
+      const user = await User.findByIdAndUpdate(
+        userId,
+        {
+          about: about
+        }
+      );
+      // console.log(user);
+      return res.json({
+        user
+      })
     } catch (ex) {
       next(ex);
     }
