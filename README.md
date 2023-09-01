@@ -12,7 +12,7 @@ Note: Backend is deployed on Render and frontend deployed separately on Netlify.
 
 To Run: 
 
-Download both frontend and backend files and type of terminal:
+Download both frontend and backend files and direct to the files and type on terminal:
 
 for backend :  node index.js
 
